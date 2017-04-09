@@ -1,3 +1,5 @@
+package Triangle;
+
 import java.io.IOException;
 
 public class Main {

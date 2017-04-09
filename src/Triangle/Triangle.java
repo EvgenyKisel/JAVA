@@ -1,3 +1,5 @@
+package Triangle;
+
 public class Triangle {
 
     private double firstSide;
