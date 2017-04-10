@@ -39,6 +39,7 @@ public class Triangle {
             }
             if (getFirstSide() == getSecondSide() && getSecondSide() == getThirdSide()) {
                 System.out.println("Triangle is equilateral.");
+                break;
             }
             if (getFirstSide() == getSecondSide() || getFirstSide() == getThirdSide() || getSecondSide() == getThirdSide()) {
                 System.out.println("Triangle is isosceles.");
