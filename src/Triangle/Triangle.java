@@ -42,6 +42,7 @@ public class Triangle {
             }
             if (getFirstSide() == getSecondSide() || getFirstSide() == getThirdSide() || getSecondSide() == getThirdSide()) {
                 System.out.println("Triangle is isosceles.");
+                break;
             }
             double max = getFirstSide();
             if (getSecondSide() > max) {
@@ -67,7 +68,9 @@ public class Triangle {
             if (Math.pow(max, 2) > Math.pow(min, 2) + Math.pow(mean, 2)) {
                 System.out.println("Triangle is obtuse-angled");
             }
+            break;
         }
+
     }
 
 }
