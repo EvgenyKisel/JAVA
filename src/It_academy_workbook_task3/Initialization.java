@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Initialization {
 
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    double a;
+    private double a;
 
     public double input() throws IOException {
         String temp;
