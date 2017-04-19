@@ -31,6 +31,7 @@ public class Triangle {
 
     public void nameOfTriangle() {
         while (true) {
+
             if (!(getFirstSide() + getSecondSide() > getThirdSide() &&
                     getSecondSide() + getThirdSide() > getFirstSide() &&
                     getFirstSide() + getThirdSide() > getSecondSide())) {
@@ -45,20 +46,8 @@ public class Triangle {
                 System.out.println("Triangle is isosceles.");
                 break;
             }
-            double max = getFirstSide();
-            if (getSecondSide() > max) {
-                max = getSecondSide();
-            }
-            if (getThirdSide() > max) {
-                max = getThirdSide();
-            }
-            double min = getFirstSide();
-            if (getSecondSide() < min) {
-                min = getSecondSide();
-            }
-            if (getThirdSide() < min) {
-                min = getThirdSide();
-            }
+            double max = Math.max(Math.max(firstSide,secondSide),thirdSide);
+            double min = Math.min(Math.min(firstSide,secondSide),thirdSide);
             double mean = getFirstSide() + getSecondSide() + getThirdSide() - max - min;
             if (Math.pow(max, 2) == Math.pow(min, 2) + Math.pow(mean, 2)) {
                 System.out.println("Triangle is rectangular");
