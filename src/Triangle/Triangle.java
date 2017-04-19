@@ -1,66 +1,97 @@
 package Triangle;
 
+
 public class Triangle {
 
-    private double firstSide;
-    private double secondSide;
-    private double thirdSide;
+    private static final double EPSILON = Double.MIN_VALUE;
 
-    public Triangle(double first, double second, double third) {
-        this.firstSide = first;
-        this.secondSide = second;
-        this.thirdSide = third;
+    public static final String CONST_NOT_EXIST = "Triangle doesn't exist.";
+    public static final String CONST_EQUILATERAL = "Triangle is equilateral.";
+    public static final String CONST_ISOSCELES = "Triangle is isosceles.";
+    public static final String CONST_RECTANGULAR = "Triangle is rectangular.";
+    public static final String CONST_ACUTE_ANGLED = "Triangle is acute-angled.";
+    public static final String CONST_OBTUSE_ANGLED = "Triangle is obtuse-angled.";
+
+    private double sideA;
+    private double sideB;
+    private double sideC;
+    private TriangleType triangleType;
+
+    enum TriangleType {
+        NOT_EXIST,
+        EQUILATERAL,
+        ISOSCELES,
+        RECTANGULAR,
+        ACUTE_ANGLED,
+        OBTUSE_ANGLED
     }
 
-    public double getFirstSide() {
-        return firstSide;
+    public Triangle(double sideA, double sideB, double sideC) {
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
     }
 
-    public double getSecondSide() {
-        return secondSide;
+    public double getSideA() {
+        return sideA;
     }
 
-    public double getThirdSide() {
-        return thirdSide;
+    public double getSideB() {
+        return sideB;
     }
 
-    public void outSides() {
-        System.out.println("Sides your entered:");
-        System.out.println(getFirstSide() + " " + getSecondSide() + " " + getThirdSide());
+    public double getSideC() {
+        return sideC;
     }
 
-    public void nameOfTriangle() {
+    public void determineTypeOfTriangle() {
         while (true) {
-
-            if (!(getFirstSide() + getSecondSide() > getThirdSide() &&
-                    getSecondSide() + getThirdSide() > getFirstSide() &&
-                    getFirstSide() + getThirdSide() > getSecondSide())) {
-                System.out.println("Wrong sides. You can't make a triangle. Enter right sides.");
+            double maxSide = Math.max(Math.max(getSideA(), getSideB()), getSideC());
+            double minSide = Math.min(Math.min(getSideA(), getSideB()), getSideC());
+            double meanSide = getSideA() + getSideB() + getSideC() - maxSide - minSide;
+            if (minSide + meanSide <= maxSide) {
+                triangleType = TriangleType.NOT_EXIST;
                 break;
             }
-            if (getFirstSide() == getSecondSide() && getSecondSide() == getThirdSide()) {
-                System.out.println("Triangle is equilateral.");
+            if (getSideA() == getSideB() && getSideB() == getSideC()) {
+                triangleType = TriangleType.EQUILATERAL;
                 break;
             }
-            if (getFirstSide() == getSecondSide() || getFirstSide() == getThirdSide() || getSecondSide() == getThirdSide()) {
-                System.out.println("Triangle is isosceles.");
+            if (getSideA() == getSideB() ||
+                    getSideA() == getSideC() ||
+                    getSideB() == getSideC()) {
+                triangleType = TriangleType.ISOSCELES;
                 break;
             }
-            double max = Math.max(Math.max(firstSide,secondSide),thirdSide);
-            double min = Math.min(Math.min(firstSide,secondSide),thirdSide);
-            double mean = getFirstSide() + getSecondSide() + getThirdSide() - max - min;
-            if (Math.pow(max, 2) == Math.pow(min, 2) + Math.pow(mean, 2)) {
-                System.out.println("Triangle is rectangular");
+            if (Math.pow(maxSide, 2) == Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+                triangleType = TriangleType.RECTANGULAR;
             }
-            if (Math.pow(max, 2) < Math.pow(min, 2) + Math.pow(mean, 2)) {
-                System.out.println("Triangle is acute-angled");
+            if (Math.pow(maxSide, 2) < Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+                triangleType = TriangleType.ACUTE_ANGLED;
             }
-            if (Math.pow(max, 2) > Math.pow(min, 2) + Math.pow(mean, 2)) {
-                System.out.println("Triangle is obtuse-angled");
+            if (Math.pow(maxSide, 2) > Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+                triangleType = TriangleType.OBTUSE_ANGLED;
             }
             break;
         }
+    }
 
+    public String getType() {
+        switch (triangleType) {
+            case NOT_EXIST:
+                return CONST_NOT_EXIST;
+            case EQUILATERAL:
+                return CONST_EQUILATERAL;
+            case ISOSCELES:
+                return CONST_ISOSCELES;
+            case RECTANGULAR:
+                return CONST_RECTANGULAR;
+            case ACUTE_ANGLED:
+                return CONST_ACUTE_ANGLED;
+            case OBTUSE_ANGLED:
+                return CONST_OBTUSE_ANGLED;
+        }
+        return triangleType.name();
     }
 
 }
