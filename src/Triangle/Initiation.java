@@ -25,6 +25,11 @@ public class Initiation {
         this.sideString = sideString;
     }
 
+    /**
+     * this method enter the string
+     *
+     * @return string your entered
+     */
     public String input() {
         try {
             System.out.print("Enter side of triangle:");
@@ -35,6 +40,12 @@ public class Initiation {
         return getSideString();
     }
 
+    /**
+     * this method translate string into double
+     *
+     * @param exchange - argument for translation into double type
+     * @return translated into double side
+     */
     public double parser(String exchange) {
         try {
             setSide(Double.parseDouble(exchange));
@@ -45,6 +56,12 @@ public class Initiation {
         return getSide();
     }
 
+    /**
+     * This method check for positivity your entered value.
+     * If the entered value is negative, the re-entry and validation method is started
+     *
+     * @param verifiable - argument that you want to check
+     */
     public void checker(double verifiable) {
         if (verifiable <= 0) {
             System.out.println("Only positive numbers. Try again");
@@ -52,6 +69,11 @@ public class Initiation {
         }
     }
 
+    /**
+     * this method causes other three methods: input the value, translate it into double and check for negativity
+     *
+     * @return entered, translated and verified side of the triangle
+     */
     public double correctInput() {
         input();
         parser(getSideString());

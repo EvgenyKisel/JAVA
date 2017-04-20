@@ -76,6 +76,11 @@ public class Triangle {
         }
     }
 
+    /**
+     * this method combine constants and enum values
+     *
+     * @return type of the triangle
+     */
     public String getType() {
         switch (triangleType) {
             case NOT_EXIST:
