@@ -26,6 +26,11 @@ public class Triangle {
         OBTUSE_ANGLED
     }
 
+    /**
+     * @param sideA  - one of three sides of the triangle
+     * @param sideB- one of three sides of the triangle
+     * @param sideC- one of three sides of the triangle
+     */
     public Triangle(double sideA, double sideB, double sideC) {
         this.sideA = sideA;
         this.sideB = sideB;
