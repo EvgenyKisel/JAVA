@@ -2,7 +2,7 @@ package Triangle;
 
 public class Main {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         try {
             Initiation inputSide = new Initiation();
             double sideA = inputSide.correctInput();

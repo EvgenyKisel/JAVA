@@ -57,9 +57,9 @@ public class Triangle {
                 triangleType = TriangleType.EQUILATERAL;
                 break;
             }
-            if (Math.abs(getSideA() - getSideB())<EPSILON ||
-                    Math.abs(getSideA() - getSideC()) <EPSILON||
-                    Math.abs(getSideB() - getSideC())<EPSILON) {
+            if (Math.abs(getSideA() - getSideB()) < EPSILON ||
+                    Math.abs(getSideA() - getSideC()) < EPSILON ||
+                    Math.abs(getSideB() - getSideC()) < EPSILON) {
                 triangleType = TriangleType.ISOSCELES;
                 break;
             }
