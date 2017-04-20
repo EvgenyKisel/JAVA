@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args)  {
         try {
-            Inputer inputSide = new Inputer();
+            Initiation inputSide = new Initiation();
             double sideA = inputSide.correctInput();
             double sideB = inputSide.correctInput();
             double sideC = inputSide.correctInput();

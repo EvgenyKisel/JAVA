@@ -53,17 +53,17 @@ public class Triangle {
                 triangleType = TriangleType.NOT_EXIST;
                 break;
             }
-            if (getSideA() == getSideB() && getSideB() == getSideC()) {
+            if (Math.abs(getSideA() - getSideB()) < EPSILON && Math.abs(getSideB() - getSideC()) < EPSILON) {
                 triangleType = TriangleType.EQUILATERAL;
                 break;
             }
-            if (getSideA() == getSideB() ||
-                    getSideA() == getSideC() ||
-                    getSideB() == getSideC()) {
+            if (Math.abs(getSideA() - getSideB())<EPSILON ||
+                    Math.abs(getSideA() - getSideC()) <EPSILON||
+                    Math.abs(getSideB() - getSideC())<EPSILON) {
                 triangleType = TriangleType.ISOSCELES;
                 break;
             }
-            if (Math.pow(maxSide, 2) == Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+            if (Math.pow(maxSide, 2) <= Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
                 triangleType = TriangleType.RECTANGULAR;
             }
             if (Math.pow(maxSide, 2) < Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
