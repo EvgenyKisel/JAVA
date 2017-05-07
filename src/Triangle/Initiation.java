@@ -6,23 +6,20 @@ import java.io.InputStreamReader;
 public class Initiation {
 
     private double side;
-    private String sideString;
+
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public double getSide() {
         return side;
     }
 
-    public String getSideString() {
-        return sideString;
-    }
-
-    public void setSide(double side) {
-        this.side = side;
-    }
-
-    public void setSideString(String sideString) {
-        this.sideString = sideString;
+    public void setSide(String side) {
+        try {
+            this.side = Double.parseDouble(side);
+        } catch (Exception e) {
+            System.out.println("It's not a number. Try again");
+            getTheSideOfTriangle();
+        }
     }
 
     /**
@@ -31,29 +28,18 @@ public class Initiation {
      * @return string your entered
      */
     public String input() {
-        try {
-            System.out.print("Enter side of triangle:");
-            setSideString(reader.readLine());
-        } catch (Exception e) {
-            System.out.println("Error");
+        String sideStr;
+        while (true) {
+            try {
+                System.out.print("Enter side of triangle: ");
+                sideStr = reader.readLine();
+            } catch (Exception e) {
+                System.out.println("Error");
+                continue;
+            }
+            break;
         }
-        return getSideString();
-    }
-
-    /**
-     * this method translate string into double
-     *
-     * @param exchange - argument for translation into double type
-     * @return translated into double side
-     */
-    public double parser(String exchange) {
-        try {
-            setSide(Double.parseDouble(exchange));
-        } catch (Exception e) {
-            System.out.println("It's not a number. Try again");
-            correctInput();
-        }
-        return getSide();
+        return sideStr;
     }
 
     /**
@@ -62,22 +48,21 @@ public class Initiation {
      *
      * @param verifiable - argument that you want to check
      */
-    public void checker(double verifiable) {
+    public void checkPositivity(double verifiable) {
         if (verifiable <= 0) {
             System.out.println("Only positive numbers. Try again");
-            correctInput();
+            getTheSideOfTriangle();
         }
     }
 
     /**
-     * this method causes other three methods: input the value, translate it into double and check for negativity
+     * this method causes other three methods: input the value, translate it into double and check for positivity
      *
      * @return entered, translated and verified side of the triangle
      */
-    public double correctInput() {
-        input();
-        parser(getSideString());
-        checker(getSide());
+    public double getTheSideOfTriangle() {
+        setSide(input());
+        checkPositivity(getSide());
         return getSide();
     }
 

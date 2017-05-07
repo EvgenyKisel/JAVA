@@ -16,6 +16,8 @@ public class Triangle {
     private double sideB;
     private double sideC;
     private TriangleType triangleType;
+    private boolean check = true;
+
 
     enum TriangleType {
         NOT_EXIST,
@@ -49,6 +51,136 @@ public class Triangle {
         return sideC;
     }
 
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public void determineAndPrintTypeOfTriangle() {
+        while (isCheck() == true) {
+            typeOfTriangleNotExist();
+            if (isCheck() == false) {
+                System.out.println(getType());
+                break;
+            }
+            typeOfTriangleEquilateral();
+            if (isCheck() == false) {
+                System.out.println(getType());
+            }
+            typeOfTriangleIsosceles();
+            if (isCheck() == false) {
+                System.out.println(getType());
+            }
+            if (isCheck() == true) {
+                typeOfTriangleRectangular();
+                typeOfTriangleObtuseAngled();
+                typeOfTriangleAcuteAngled();
+                System.out.println(getType());
+            }
+            break;
+        }
+    }
+
+    public void typeOfTriangleNotExist() {
+        double maxSide = Math.max(Math.max(getSideA(), getSideB()), getSideC());
+        double minSide = Math.min(Math.min(getSideA(), getSideB()), getSideC());
+        double meanSide = getSideA() + getSideB() + getSideC() - maxSide - minSide;
+        if (minSide + meanSide <= maxSide) {
+            triangleType = TriangleType.NOT_EXIST;
+            setCheck(false);
+        } else {
+            setCheck(true);
+        }
+    }
+
+    public void typeOfTriangleEquilateral() {
+        if (Math.abs(getSideA() - getSideB()) < EPSILON &&
+                Math.abs(getSideB() - getSideC()) < EPSILON) {
+            triangleType = TriangleType.EQUILATERAL;
+            setCheck(false);
+        } else {
+            setCheck(true);
+        }
+    }
+
+    public void typeOfTriangleIsosceles() {
+        if (Math.abs(getSideA() - getSideB()) < EPSILON ||
+                Math.abs(getSideA() - getSideC()) < EPSILON ||
+                Math.abs(getSideB() - getSideC()) < EPSILON) {
+            triangleType = TriangleType.ISOSCELES;
+            setCheck(false);
+        } else {
+            setCheck(true);
+        }
+    }
+
+    public void typeOfTriangleRectangular() {
+        double maxSide = Math.max(Math.max(getSideA(), getSideB()), getSideC());
+        double minSide = Math.min(Math.min(getSideA(), getSideB()), getSideC());
+        double meanSide = getSideA() + getSideB() + getSideC() - maxSide - minSide;
+        if (Math.pow(maxSide, 2) == Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+            triangleType = TriangleType.RECTANGULAR;
+            setCheck(false);
+        } else {
+            setCheck(true);
+        }
+    }
+
+    public void typeOfTriangleAcuteAngled() {
+        double maxSide = Math.max(Math.max(getSideA(), getSideB()), getSideC());
+        double minSide = Math.min(Math.min(getSideA(), getSideB()), getSideC());
+        double meanSide = getSideA() + getSideB() + getSideC() - maxSide - minSide;
+        if (Math.pow(maxSide, 2) < Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+            triangleType = TriangleType.ACUTE_ANGLED;
+            setCheck(false);
+        } else {
+            setCheck(true);
+        }
+    }
+
+    public void typeOfTriangleObtuseAngled() {
+        double maxSide = Math.max(Math.max(getSideA(), getSideB()), getSideC());
+        double minSide = Math.min(Math.min(getSideA(), getSideB()), getSideC());
+        double meanSide = getSideA() + getSideB() + getSideC() - maxSide - minSide;
+        if (Math.pow(maxSide, 2) > Math.pow(minSide, 2) + Math.pow(meanSide, 2)) {
+            triangleType = TriangleType.OBTUSE_ANGLED;
+            setCheck(false);
+        } else {
+            setCheck(true);
+        }
+    }
+
+
+    /**
+     * this method combine constants and enum values
+     *
+     * @return type of the triangle
+     */
+    public String getType() {
+        switch (triangleType) {
+            case NOT_EXIST:
+                return CONST_NOT_EXIST;
+            case EQUILATERAL:
+                return CONST_EQUILATERAL;
+            case ISOSCELES:
+                return CONST_ISOSCELES;
+            case RECTANGULAR:
+                return CONST_RECTANGULAR;
+            case ACUTE_ANGLED:
+                return CONST_ACUTE_ANGLED;
+            case OBTUSE_ANGLED:
+                return CONST_OBTUSE_ANGLED;
+        }
+        return triangleType.name();
+    }
+
+}
+/*
+
+
     public void determineTypeOfTriangle() {
         while (true) {
             double maxSide = Math.max(Math.max(getSideA(), getSideB()), getSideC());
@@ -80,28 +212,4 @@ public class Triangle {
             break;
         }
     }
-
-    /**
-     * this method combine constants and enum values
-     *
-     * @return type of the triangle
-     */
-    public String getType() {
-        switch (triangleType) {
-            case NOT_EXIST:
-                return CONST_NOT_EXIST;
-            case EQUILATERAL:
-                return CONST_EQUILATERAL;
-            case ISOSCELES:
-                return CONST_ISOSCELES;
-            case RECTANGULAR:
-                return CONST_RECTANGULAR;
-            case ACUTE_ANGLED:
-                return CONST_ACUTE_ANGLED;
-            case OBTUSE_ANGLED:
-                return CONST_OBTUSE_ANGLED;
-        }
-        return triangleType.name();
-    }
-
-}
+ */
